@@ -3,27 +3,33 @@ import UIKit
 
 class ShowContactTVC: UITableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+  var showContact = Contact(name: "", surname: "", dateOfBirth: "", company: "", email: "", phoneNumber: "")
 
-  @IBAction func editButton(_ sender: Any) {
+  @IBOutlet var nameLabel: UILabel!
+  @IBOutlet var surnameLabel: UILabel!
+  @IBOutlet var dateOfBirthlabel: UILabel!
+  @IBOutlet var companyLabel: UILabel!
+  @IBOutlet var emailLabel: UILabel!
+  @IBOutlet var phoneNumberLabel: UILabel!
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    updateContact()
+  }
+  @IBAction func editContact(_ sender: UIBarButtonItem) {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    guard let newContactTVC = storyboard.instantiateViewController(identifier: "NewContactTVC") as? NewContactTVC else { return }
-    present(newContactTVC, animated: true)
+    guard let editTableVC = storyboard.instantiateViewController(identifier: "NewContactTVC") as? NewContactTVC else { return }
+    show(editTableVC, sender: nil)
+    editTableVC.contactNew = showContact
   }
-  override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        return cell
-    }
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  func updateContact() {
+    nameLabel.text = showContact.name
+    surnameLabel.text = showContact.surname
+    dateOfBirthlabel.text = showContact.dateOfBirth
+    companyLabel.text = showContact.company
+    emailLabel.text = showContact.email
+    phoneNumberLabel.text = showContact.phoneNumber
   }
+
 }

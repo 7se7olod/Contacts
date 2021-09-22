@@ -1,6 +1,6 @@
 import UIKit
 
-var filteredContacts = [Contact]()
+var filteredContacts = [Contact]() // Список отфильтрованных контактов
 let searchController = UISearchController(searchResultsController: nil)
 var searchBarIsEmpty: Bool {
   guard let text = searchController.searchBar.text else { return false }
@@ -11,7 +11,7 @@ var isFiltering: Bool {
 }
 
 extension ContactsTVC: UISearchResultsUpdating {
-
+  // настройка searchController
   func setSearchController(navigationItem: UINavigationItem) {
     searchController.searchResultsUpdater = self
     searchController.obscuresBackgroundDuringPresentation = false
@@ -19,20 +19,17 @@ extension ContactsTVC: UISearchResultsUpdating {
     navigationItem.searchController = searchController
     definesPresentationContext = true
   }
-
   func updateSearchResults(for searchController: UISearchController) {
     filterContentForSearchText(searchController.searchBar.text!)
   }
+  // фильтр по имени, фамилии, номеру тлф, емэйлу
   private func filterContentForSearchText(_ searchText: String) {
     filteredContacts = contacts.filter({ (contact: Contact) -> Bool in
-
+      let email = contact.email?.lowercased().contains(searchText.lowercased()) ?? false
       let surname = contact.surname?.lowercased().contains(searchText.lowercased()) ?? false
       let name = contact.name?.lowercased().contains(searchText.lowercased()) ?? false
       let phoneNumber = contact.phoneNumber?.lowercased().contains(searchText.lowercased()) ?? false
-
-      // MARK: нужна проверка по номеру телефона
-
-      return name || surname || phoneNumber
+      return name || surname || phoneNumber || email
     })
     tableView.reloadData()
   }

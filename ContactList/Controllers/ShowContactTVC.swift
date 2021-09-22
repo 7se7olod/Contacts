@@ -19,11 +19,13 @@ class ShowContactTVC: UITableViewController {
   @IBAction func editContact(_ sender: UIBarButtonItem) {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     guard let editTableVC = storyboard.instantiateViewController(identifier: "NewContactTVC") as? NewContactTVC else { return }
+    editTableVC.saveButtonOutlet.title = ""
+    editTableVC.navigationItem.title = "Изменить контакт"
     show(editTableVC, sender: nil)
     editTableVC.contactNew = showContact
   }
 
-  func updateContact() {
+  private func updateContact() {
     nameLabel.text = showContact.name
     surnameLabel.text = showContact.surname
     dateOfBirthlabel.text = showContact.dateOfBirth

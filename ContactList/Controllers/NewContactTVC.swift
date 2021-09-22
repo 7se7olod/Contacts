@@ -8,11 +8,11 @@ class NewContactTVC: UITableViewController {
   @IBOutlet var surnameNewTF: UITextField!
   @IBOutlet var dateOfBirthNewTF: UITextField!
   @IBOutlet var companyNewTF: UITextField!
-  // MARK: сделать валидацию на email
   @IBOutlet var emailNewTF: UITextField!
-  // MARK: сделать валидацию по номеру тлф
   @IBOutlet var phoneNumberNewTF: UITextField!
   @IBOutlet var saveButtonOutlet: UIBarButtonItem!
+  @IBOutlet var updateButtonOutlet: UIBarButtonItem!
+  let datePicker = UIDatePicker()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,9 +21,8 @@ class NewContactTVC: UITableViewController {
     updateContact()
   }
 
-  // MARK: - Ввод букв
+  // MARK: - Ввод только Рус и Англ букв в поля имя и фамилия
   @IBAction func nameSurnameActiveSaveButton(_ sender: UITextField) {
-    activeSaveButton()
     let ruCharacters = "йцукенгшщзхъфывапролджэёячсмитьбю"
     let engCharacters = "qwertyuiopasdfghjklzxcvbnm"
     guard let lastChar = sender.text?.last?.description.lowercased() else { return }
@@ -35,11 +34,8 @@ class NewContactTVC: UITableViewController {
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
-    if segue.identifier == "SaveContactSegue" {
+    guard segue.identifier == "SaveContactSegue" || segue.identifier == "UpdateContactSegue" else { return }
       self.updateNewContact()
-    } else if segue.identifier == "UpdateContactSegue" {
-      self.updateNewContact()
-    }
   }
 
   private func updateContact() {
@@ -52,7 +48,7 @@ class NewContactTVC: UITableViewController {
   }
 
   private func updateNewContact() {
-    let name = nameNewTF.text ?? ""
+     let name = nameNewTF.text ?? ""
     let surname = surnameNewTF.text ?? ""
     let dateOfBirth = dateOfBirthNewTF.text ?? ""
     let company = companyNewTF.text ?? ""
@@ -62,11 +58,17 @@ class NewContactTVC: UITableViewController {
   }
 
   // MARK: - Активация кнопки "Сохранить"
+  @IBAction func activSaveButton(_ sender: UITextField) {
+    activeSaveButton()
+  }
+
   private func activeSaveButton() {
-    let nameText = nameNewTF.text ?? ""
-    let surnameText = surnameNewTF.text ?? ""
-    saveButtonOutlet.isEnabled = !nameText.isEmpty && !surnameText.isEmpty
+    let name = nameNewTF.text ?? ""
+    let surname = surnameNewTF.text ?? ""
+    let dateOfBirth = dateOfBirthNewTF.text ?? ""
+    let company = companyNewTF.text ?? ""
+    let email = emailNewTF.text ?? ""
+    let phoneNumber = phoneNumberNewTF.text ?? ""
+    saveButtonOutlet.isEnabled = !name.isEmpty && !surname.isEmpty && !dateOfBirth.isEmpty && !company.isEmpty && !email.isEmpty && !phoneNumber.isEmpty
   }
 }
-
-

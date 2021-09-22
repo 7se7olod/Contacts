@@ -74,15 +74,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		2D7E9A3626F8623E000CC396 /* Controller */ = {
+		2D7E9A3626F8623E000CC396 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2D7E9A3A26F86274000CC396 /* CellContact */,
 				2DA72B0626F735C800A532FA /* ContactsTVC.swift */,
 				2DA72B0F26F7421600A532FA /* ShowContactTVC.swift */,
 				2D7E9A3126F86041000CC396 /* NewContactTVC.swift */,
 				2D08F5E326FB05BC0018922A /* Extensions */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		2D7E9A3826F86246000CC396 /* Model */ = {
@@ -93,12 +94,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2D7E9A3A26F86274000CC396 /* View */ = {
+		2D7E9A3A26F86274000CC396 /* CellContact */ = {
 			isa = PBXGroup;
 			children = (
 				2DA72B0C26F7387500A532FA /* Cell.swift */,
 			);
-			path = View;
+			path = CellContact;
 			sourceTree = "<group>";
 		};
 		2DA72AE026F7351E00A532FA = {
@@ -124,8 +125,7 @@
 				2DA72AEC26F7351E00A532FA /* AppDelegate.swift */,
 				2DA72AEE26F7351E00A532FA /* SceneDelegate.swift */,
 				2D7E9A3826F86246000CC396 /* Model */,
-				2D7E9A3A26F86274000CC396 /* View */,
-				2D7E9A3626F8623E000CC396 /* Controller */,
+				2D7E9A3626F8623E000CC396 /* Controllers */,
 				2D7E9A3526F86228000CC396 /* Resources */,
 			);
 			path = ContactList;
